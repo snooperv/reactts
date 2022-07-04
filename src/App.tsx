@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
     <div>
-      <button>Нажми меня</button>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        Нажми меня
+      </button>
       <br />
-      счетчик
+      счетчик={count}
     </div>
   );
 }
