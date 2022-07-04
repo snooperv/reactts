@@ -1,38 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 
-/* Нащ\ш собственный тип данных, который нужен для работы функции format() */
-interface formatUser {
-  firstName: string;
-  secondname: string;
-  patronymic?: string;
+interface mainProps {
+  page: string;
+  example: number;
+}
+
+function MainContent(props: mainProps) {
+  if (props.page == "главная") {
+    return <div>Контент главной страницы</div>;
+  } else if (props.page == "вторая") {
+    return <div>Контент второй страницы</div>;
+  } else if (props.page == "третья") {
+    return <div>Контент третьей страницы</div>;
+  }
+  return <div></div>;
 }
 
 function App() {
-  /* Функция (просто выглядит немного по-другому) */
-  const format = (user: formatUser) => {
-    let name = user.firstName + " " + user.secondname;
-    if (user.patronymic) {
-      name += " " + user.patronymic;
-    }
-    return name;
-  };
+  const [page, setPage] = useState("главная");
 
-  /* Переменная user - словарь, который имеет три поля (ключа) */
-  const user = {
-    firstName: "Ivan",
-    patronymic: "Ivanovich",
-    secondname: "Ivanov",
-  };
-
-  const user2 = {
-    firstName: "Petr",
-    secondname: "Petrov",
-  };
-
-  /* Константа (неизменяемая переменная) */
-  const elem = <h1>Привет, {format(user)}!</h1>;
-
-  return elem; /* Отображаем элемент elem */
+  return (
+    <div>
+      <a
+        onClick={() => {
+          setPage("главная");
+        }}
+      >
+        Главная
+      </a>
+      <br />
+      <a
+        onClick={() => {
+          setPage("вторая");
+        }}
+      >
+        Вторая страница
+      </a>
+      <br />
+      <a
+        onClick={() => {
+          setPage("третья");
+        }}
+      >
+        Третья страница
+      </a>
+      <br />
+      <MainContent page={page} example={10} />
+    </div>
+  );
 }
 
 export default App;
