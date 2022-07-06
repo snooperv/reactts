@@ -1,51 +1,38 @@
 import React, { useState } from "react";
 
-interface mainProps {
-  page: string;
-  example: number;
-}
-
-function MainContent(props: mainProps) {
-  if (props.page == "главная") {
-    return <div>Контент главной страницы</div>;
-  } else if (props.page == "вторая") {
-    return <div>Контент второй страницы</div>;
-  } else if (props.page == "третья") {
-    return <div>Контент третьей страницы</div>;
-  }
-  return <div></div>;
-}
-
 function App() {
-  const [page, setPage] = useState("главная");
+  const [isClick, setIsClick] = useState(false);
+  const [example, setExample] = useState<string>();
 
   return (
     <div>
-      <a
+      <button
         onClick={() => {
-          setPage("главная");
+          setIsClick(!isClick);
         }}
       >
-        Главная
-      </a>
-      <br />
-      <a
-        onClick={() => {
-          setPage("вторая");
-        }}
-      >
-        Вторая страница
-      </a>
-      <br />
-      <a
-        onClick={() => {
-          setPage("третья");
-        }}
-      >
-        Третья страница
-      </a>
-      <br />
-      <MainContent page={page} example={10} />
+        Нажми меня
+      </button>
+
+      {isClick ? (
+        <p>Переменная isClick равна true</p>
+      ) : (
+        <p>А сейчас переменная равна false</p>
+      )}
+      {isClick && <p>Текст показан</p>}
+
+      {example || (
+        <div>
+          <p>Переменная не определена</p>
+          <button
+            onClick={() => {
+              setExample("Новый текст");
+            }}
+          >
+            Назначить новый текст
+          </button>
+        </div>
+      )}
     </div>
   );
 }
