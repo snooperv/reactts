@@ -1,27 +1,32 @@
 import React, { useState } from "react";
 
 interface IProps {
-  items: number[];
+  items: {
+    id: number;
+    data: string;
+  }[];
 }
 
 function ListView(props: IProps) {
   const elements = props.items.map((elem) => {
-    return <li>{elem}</li>;
+    return <li key={elem.id}>{elem.data}</li>;
   });
 
-  return (
-    <ul>
-      {elements}
-    </ul>
-  );
+  return <ul>{elements}</ul>;
 }
 
 function App() {
-  const list = [10, 20, 30, 40, 50, 6, 7, 8, 9, 10, 11, 12];
+  const list = [
+    { id: 1, data: "Ivan" },
+    { id: 2, data: "Petr" },
+    { id: 3, data: "Vasilii" },
+    { id: 4, data: "Evgenii" },
+    { id: 5, data: "Anastasia" },
+  ];
 
   return (
     <div>
-        <ListView items={list} />
+      <ListView items={list} />
     </div>
   );
 }
