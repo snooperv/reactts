@@ -1,38 +1,27 @@
 import React, { useState } from "react";
 
+interface IProps {
+  items: number[];
+}
+
+function ListView(props: IProps) {
+  const elements = props.items.map((elem) => {
+    return <li>{elem}</li>;
+  });
+
+  return (
+    <ul>
+      {elements}
+    </ul>
+  );
+}
+
 function App() {
-  const [isClick, setIsClick] = useState(false);
-  const [example, setExample] = useState<string>();
+  const list = [10, 20, 30, 40, 50, 6, 7, 8, 9, 10, 11, 12];
 
   return (
     <div>
-      <button
-        onClick={() => {
-          setIsClick(!isClick);
-        }}
-      >
-        Нажми меня
-      </button>
-
-      {isClick ? (
-        <p>Переменная isClick равна true</p>
-      ) : (
-        <p>А сейчас переменная равна false</p>
-      )}
-      {isClick && <p>Текст показан</p>}
-
-      {example || (
-        <div>
-          <p>Переменная не определена</p>
-          <button
-            onClick={() => {
-              setExample("Новый текст");
-            }}
-          >
-            Назначить новый текст
-          </button>
-        </div>
-      )}
+        <ListView items={list} />
     </div>
   );
 }
