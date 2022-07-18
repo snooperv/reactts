@@ -10,10 +10,39 @@ interface IData {
 
 function App() {
   const [perconalData, setPerconalData] = useState<IData>();
-  const mainForm:JSX.Element= (
+  const [flag, setFlag] = useState(false);
+
+  console.log(perconalData);
+
+  function toggleFlag(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setFlag(true);
+  }
+
+  function process() {
+    function check() {
+      let result = "";
+      if (perconalData?.email) result += <span>{perconalData.email}</span>;
+      if (perconalData?.city) result += <span>{perconalData.city}</span>;
+      return result;
+    }
+
+console.log(perconalData)
+
+    return (
+      <div>
+        <p>
+          Добро пожаловать{perconalData?.name} {perconalData?.surname}
+        </p>
+        {check()}
+      </div>
+    );
+  }
+
+  const mainForm: JSX.Element = (
     <div>
       <h3>Вы не авторизованны, пройдите небольшую регистрацию</h3>
-      <form>
+      <form onSubmit={(event) => toggleFlag(event)}>
         <label>
           Имя{" "}
           <input
@@ -65,7 +94,8 @@ function App() {
       </form>
     </div>
   );
-  return { mainForm };
+
+  return <div>{flag ? process() : mainForm}</div>;
 }
 
 export default App;
