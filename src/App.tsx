@@ -12,29 +12,19 @@ function App() {
   const [perconalData, setPerconalData] = useState<IData>();
   const [flag, setFlag] = useState(false);
 
-  console.log(perconalData);
-
   function toggleFlag(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setFlag(true);
   }
 
   function process() {
-    function check() {
-      let result = "";
-      if (perconalData?.email) result += <span>{perconalData.email}</span>;
-      if (perconalData?.city) result += <span>{perconalData.city}</span>;
-      return result;
-    }
-
-console.log(perconalData)
-
     return (
       <div>
         <p>
-          Добро пожаловать{perconalData?.name} {perconalData?.surname}
+          Добро пожаловать, {perconalData?.name} {perconalData?.surname}!
         </p>
-        {check()}
+        {perconalData?.email ? <p>Ваш email: {perconalData.email}</p> : ""}
+        {perconalData?.city ? <p>Ваш город: {perconalData.city}</p> : ""}
       </div>
     );
   }
@@ -48,7 +38,13 @@ console.log(perconalData)
           <input
             type="text"
             required
-            onChange={(event) => setPerconalData({ name: event.target.value })}
+            onChange={(event) =>
+              setPerconalData({
+                name: event.target.value,
+                surname: perconalData?.surname,
+                password: perconalData?.password,
+              })
+            }
           />
         </label>{" "}
         <br />
@@ -58,7 +54,11 @@ console.log(perconalData)
             type="text"
             required
             onChange={(event) =>
-              setPerconalData({ surname: event.target.value })
+              setPerconalData({
+                name: perconalData?.name,
+                surname: event.target.value,
+                password: perconalData?.password,
+              })
             }
           />
         </label>
@@ -69,7 +69,11 @@ console.log(perconalData)
             type="password"
             required
             onChange={(event) =>
-              setPerconalData({ password: event.target.value })
+              setPerconalData({
+                name: perconalData?.name,
+                surname: perconalData?.surname,
+                password: event.target.value,
+              })
             }
           />
         </label>
@@ -78,7 +82,14 @@ console.log(perconalData)
           Е-майл{" "}
           <input
             type="email"
-            onChange={(event) => setPerconalData({ email: event.target.value })}
+            onChange={(event) =>
+              setPerconalData({
+                name: perconalData?.name,
+                surname: perconalData?.surname,
+                password: perconalData?.password,
+                email: event.target.value,
+              })
+            }
           />
         </label>
         <br />
@@ -86,7 +97,15 @@ console.log(perconalData)
           Город{" "}
           <input
             type="text"
-            onChange={(event) => setPerconalData({ city: event.target.value })}
+            onChange={(event) =>
+              setPerconalData({
+                name: perconalData?.name,
+                surname: perconalData?.surname,
+                password: perconalData?.password,
+                email: perconalData?.email,
+                city: event.target.value,
+              })
+            }
           />
         </label>
         <br />
